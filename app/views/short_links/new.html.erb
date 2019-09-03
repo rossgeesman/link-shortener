@@ -1,3 +1,15 @@
+<% if @short_link.errors.any? %>
+  <div>
+    <h2>
+      <%= pluralize(@short_link.errors.count, "error") %> prevented us from shortening this link:
+    </h2>
+    <ul>
+      <% @short_link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <%= form_for @short_link do |f| %>
   <%= f.text_field :original_url, placeholder: 'Paste a url' %>
   <%= f.submit 'Shorten' %>

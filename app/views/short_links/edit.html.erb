@@ -1,0 +1,15 @@
+<h1>Link Admin Page</h1>
+<h3>Original URL: <%= link_to @short_link.original_url, @short_link.original_url %></h3>
+<h3>Shortened URL: <%= link_to shortened_link_url(@short_link.id.to_s(36)), shortened_link_url(@short_link.id.to_s(36)) %></h3>
+<h3>Secret Admin URL: <%= link_to short_link_admin_url(@short_link.admin_secret), short_link_admin_url(@short_link.admin_secret) %></h3>
+<h3>View Count: <%= @short_link.view_count%></h3>
+<h3>Settings: </h3>
+<%= form_for @short_link do |f| %>
+  <%= hidden_field_tag :admin_secret, @short_link.admin_secret %>
+  <%= hidden_field_tag :active, '' %>
+  <div>
+    <%= label_tag(:short_link, 'Visible') %>
+    <%= check_box_tag :active, 'yes', @short_link.active %>
+  </div>
+  <%= f.submit 'Save' %>
+<% end %>
